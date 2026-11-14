@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message for Seii</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #e3f2fd, #ffffff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        text-align: center;
+        max-width: 400px;
+        position: relative;
+        overflow: visible;
+        z-index: 2;
+    }
+
+    h1 { font-size: 22px; }
+    p { color: #444; font-size: 15px; }
+
+    .buttons {
+        margin-top: 20px;
+        position: relative;
+        height: 120px;
+    }
+
+    button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        position: absolute;
+    }
+
+    .yes {
+        background-color: #4caf50;
+        color: white;
+        left: 20%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .no {
+        background-color: #f44336;
+        color: white;
+        left: 70%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    img {
+        margin-top: 15px;
+        width: 100%;
+        border-radius: 10px;
+        display: none;
+    }
+
+    .confetti {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        top: 0;
+        opacity: 0.8;
+        animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(100vh) rotate(360deg);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>HIIII SEII 👋</h1>
+    <p>aq itu... je pogi 😏 </p>
+
+    <p>
+        i just wanted to ask if you'd be interested in going out with me sometime. 
+        just something simple like hanging out, coffee date or eat sum snaks ^^</p>
+    
+    <p> 
+        (TRA NA SUMAMA KA PLEASE SAPILITAN 'TO!) </p>
+
+    <p>no pressure but press YES!😠</p>
+
+    <div class="buttons" id="btnArea">
+        <button class="yes" id="yesBtn" onclick="yesClick()">Yes</button>
+        <button class="no" id="noBtn" onclick="noClick()">No</button>
+    </div>
+
+    <img id="meme">
+</div>
+
+<script>
+let noCount = 0;
+let yesSize = 14;
+
+function yesClick() {
+    const meme = document.getElementById("meme");
+    meme.style.display = "block";
+    meme.src = "https://media.tenor.com/2PZJreb1xAoAAAAM/funny-cat-cat.gif";
+
+    launchConfetti();
+
+    alert("YEHEYYYY, WALANG MAG B-BACK OUT DITO HAA LOVE U");
+}
+
+function noClick() {
+    noCount++;
+
+    const memes = [
+        "https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyY2MxcjA5d3pmOW0wZWUwOHBsb3AzZXFvanp5bjg5NXdsb3gxZTNjMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/11tTNkNy1SdXGg/giphy.gif",
+        "https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDNiOHNnd3g2dm41cjNiZXZsZWVwejFlY3AyYTBqcnBibTVmcXQ4YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/OHRF8LZis06OiPDJby/giphy.gif",
+        "https://media.tenor.com/fOox3nnUnZ4AAAAM/adam-sandler-billy-madison.gif"
+    ];
+
+    const meme = document.getElementById("meme");
+    meme.style.display = "block";
+    meme.src = memes[noCount % memes.length];
+
+    // Grow YES button
+    yesSize += 6;
+    document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+
+    // Move NO button
+    const noBtn = document.getElementById("noBtn");
+    const area = document.getElementById("btnArea");
+
+    const X = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const Y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+    noBtn.style.left = Math.random() * X + "px";
+    noBtn.style.top = Math.random() * Y + "px";
+
+    if (noCount == 1) {
+        alert("anong no ka d'yan, click yes na hays");
+    } else if (noCount == 2) {
+        alert("SERYOSO KA BA, BAKIT PURO KA NO!!!");
+    } else if (noCount >= 3) {
+        alert("PLEASE PLEASE PLEASE LET ME GET WHAT I WANT LORD KNOWS IT'LL BE THE LAST TIME");
+        noBtn.style.display = "none";
+    }
+}
+
+// Confetti function
+function launchConfetti() {
+    for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = 
+            ["#f44336", "#4caf50", "#2196f3", "#ffeb3b"][Math.floor(Math.random() * 4)];
+
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 4000);
+    }
+}
+</script>
+
+</body>
+</html>
